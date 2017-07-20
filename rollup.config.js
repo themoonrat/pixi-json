@@ -47,7 +47,7 @@ export default {
     format,
     moduleName: '__pixiJSON',
     intro: `if (typeof PIXI === 'undefined') { throw 'PixiJS is required'; }`,
-    outro: `Object.assign(PIXI, __pixiJSON);`,
+    outro: ``,
     entry,
     dest,
     sourceMap: true,
