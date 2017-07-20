@@ -10,7 +10,7 @@ const format = process.env.FORMAT || 'umd';
 const entry = `src/index.js`;
 const suffix = prod ? `.min` : '';
 const suffixFormat = format !== 'umd' ? `.${format}` : '';
-const dest = `bin/${suffixFormat}${suffix}.js`;
+const dest = `bin/pixi-json${suffixFormat}${suffix}.js`;
 
 const plugins = [
     resolve(),

@@ -1,1 +1,1 @@
-export 0;
+PIXI.pixiJSON = {};
