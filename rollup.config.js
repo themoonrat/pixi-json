@@ -45,7 +45,6 @@ const banner = `/*!
 export default {
     banner,
     format,
-    moduleName: '__pixiJSON',
     intro: `if (typeof PIXI === 'undefined') { throw 'PixiJS is required'; }`,
     outro: ``,
     entry,
