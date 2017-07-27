@@ -4,7 +4,7 @@ import isString from 'lodash-es/isString';
 
 export default function () {
     PIXI.Sprite.prototype.toJSON = function toJSON() {
-        const json = super.toJSON();
+        const json = PIXI.Container.prototype.toJSON.call( this );
 
         json.anchor = {
             x: this.anchor.x,
@@ -19,7 +19,7 @@ export default function () {
     };
 
     PIXI.Sprite.prototype.updateViaJSON = function updateViaJSON(json) {
-        super.updateViaJSON(json);
+		PIXI.Container.protoype.updateViaJSON.call(this, json);
 
         if (isObject(json.anchor)) {
             if (isNumber(json.anchor.x)) {

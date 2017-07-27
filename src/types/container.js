@@ -3,7 +3,7 @@ import isFunction from 'lodash-es/isFunction';
 
 export default function () {
     PIXI.Container.prototype.toJSON = function toJSON() {
-        const json = super.toJSON();
+        const json = PIXI.DisplayObject.prototype.toJSON.call( this );
 
         json.children = [];
         for (let i = 0; i < this.children.length; ++i) {
@@ -16,8 +16,8 @@ export default function () {
     };
 
     PIXI.Container.prototype.updateViaJSON = function updateViaJSON(json) {
-        super.updateViaJSON(json);
-
+		PIXI.DisplayObject.protoype.updateViaJSON.call(this, json);
+		
         if (isArray(json.children)) {
             for (let i = 0; i < json.children.length; ++i) {
                 if (this.children[i]) {

@@ -1,5 +1,5 @@
 import pkg from './package.json';
-import buble from 'rollup-plugin-buble';
+import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
@@ -14,7 +14,9 @@ const dest = `bin/pixi-json${suffixFormat}${suffix}.js`;
 
 const plugins = [
     resolve(),
-    buble()
+    babel({
+      exclude: 'node_modules/**'
+    })
 ];
 
 if (prod) {
