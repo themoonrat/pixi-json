@@ -15,22 +15,14 @@ const dest = `bin/pixi-json${suffixFormat}${suffix}.js`;
 const plugins = [
     resolve(),
     babel({
-      exclude: 'node_modules/**'
-    })
+        exclude: 'node_modules/**',
+    }),
 ];
 
 if (prod) {
     plugins.push(uglify({
         mangle: true,
         compress: true,
-        output: {
-            comments: function(node, comment) {
-                const {value, type} = comment;
-                if (type === 'comment2') {
-                    return value[0] === '!';
-                }
-            }
-        }
     }, minify));
 }
 
@@ -52,5 +44,6 @@ export default {
     entry,
     dest,
     sourceMap: true,
-    plugins
+    moduleName: `__pixiJson`,
+    plugins,
 };
