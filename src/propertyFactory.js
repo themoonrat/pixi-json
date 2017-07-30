@@ -3,32 +3,32 @@ import isFunction from 'lodash-es/isFunction';
 import isObject from 'lodash-es/isObject';
 import isString from 'lodash-es/isString';
 
-const propertyMap = {};
+const propertyTypeMap = {};
 
 export default {
-    addProperty(propertyName, toJson, fromJson) {
-        if (!isString(propertyName) || propertyMap[propertyName] || !isFunction(toJson) || !isFunction(fromJson)) {
+    addPropertyType(propertyType, toJson, fromJson) {
+        if (!isString(propertyType) || propertyTypeMap[propertyType] || !isFunction(toJson) || !isFunction(fromJson)) {
             return;
         }
 
-        propertyMap[propertyName] = {
+        propertyTypeMap[propertyType] = {
             toJson,
             fromJson,
         };
     },
 
-    toJson(instance, propertyNames) {
-        if (!isObject(instance) || !isArray(propertyNames)) {
+    toJson(instance, properties) {
+        if (!isObject(instance) || !isArray(properties)) {
             return;
         }
 
         const json = {};
 
-        for (let i = 0; i < propertyNames.length; ++i) {
-            const propertyName = propertyNames[i];
+        for (let i = 0; i < properties.length; ++i) {
+            const propertyName = properties[i];
 
-            if (propertyMap[propertyName]) {
-                const propertyToJson = propertyMap[propertyName].toJson;
+            if (propertyTypeMap[propertyName]) {
+                const propertyToJson = propertyTypeMap[propertyName].toJson;
 
                 json[propertyName] = propertyToJson(instance, propertyName);
             }
@@ -41,8 +41,8 @@ export default {
         }
 
         for (const [key, value] of Object.entries(json)) {
-            if (propertyMap[key]) {
-                const propertyFromJson = propertyMap[key].fromJson;
+            if (propertyTypeMap[key]) {
+                const propertyFromJson = propertyTypeMap[key].fromJson;
 
                 instance[key] = propertyFromJson(instance, value);
             }

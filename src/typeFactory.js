@@ -17,35 +17,25 @@ export default {
         };
     },
 
-    toJson(instance, propertyNames) {
-        if (!isObject(instance) || !isArray(propertyNames)) {
+    toJson(instance) {
+        if (!isObject(instance) || !typeMap[instance.contructor.name]) {
             return;
         }
 
-        const json = {};
-
-        for (let i = 0; i < propertyNames.length; ++i) {
-            const propertyName = propertyNames[i];
-
-            if (typeMap[propertyName]) {
-                const propertyToJson = typeMap[propertyName].toJson;
-
-                json[propertyName] = propertyToJson(instance, propertyName);
-            }
-        }
+        return typeMap[instance.contructor.name].toJson(instance);
     },
 
-    fromJson(instance, json) {
-        if (!isObject(instance) || !isObject(json)) {
+    fromJson(json, instance) {
+        if (!isObject(json) || !isString(json.type)) {
             return;
         }
 
-        for (const [key, value] of Object.entries(json)) {
-            if (typeMap[key]) {
-                const propertyFromJson = typeMap[key].fromJson;
-
-                instance[key] = propertyFromJson(instance, value);
+        if (isObject(instance)) {
+            if (json.type !== instance.contructor.type) {
+                return;
             }
         }
+
+        return typeMap[json.type].fromJson(json, instance);
     },
 };
