@@ -18,6 +18,9 @@ docs
 # jetBrains IDE ignores
 .idea
 
+# visual studio code IDE ignores
+.vscode
+
 # sublime text files
 *.sublime*
 *.*~*.TMP
