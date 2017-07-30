@@ -6,8 +6,10 @@ PIXI.Container.prototype.toJSON = function toJSON() {
 
     json.children = [];
     for (let i = 0; i < this.children.length; ++i) {
-        if (isFunction(this.children.toJSON)) {
-            json.children.push(this.children.toJSON());
+        const child = this.children[i];
+
+        if (isFunction(child.toJSON)) {
+            json.children.push(child.toJSON());
         }
     }
 

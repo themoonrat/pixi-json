@@ -2,6 +2,13 @@ import isNumber from 'lodash-es/isNumber';
 import isObject from 'lodash-es/isObject';
 import isString from 'lodash-es/isString';
 
+const properties = [
+    { name: 'anchor', type: 'Point' },
+    { name: 'blendMode', type: 'Number' },
+    { name: 'pluginName', type: 'String' },
+    { name: 'tint', type: 'Number' },
+];
+
 PIXI.Sprite.prototype.toJSON = function toJSON() {
     const json = PIXI.Container.prototype.toJSON.call(this);
 

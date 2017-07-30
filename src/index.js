@@ -1,3 +1,3 @@
-export * from './types/DisplayObject';
-export * from './types/Container';
-export * from './types/Sprite';
+import './types/DisplayObject';
+import './types/Container';
+import './types/Sprite';
